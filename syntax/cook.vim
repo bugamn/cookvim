@@ -14,33 +14,33 @@ endif
 
 " special quoting
 syn match cookSpecial       "\\\(\d\{1,3}\|.\)"
-syn match cookString        "\(\".\"\|'.'\)"
+syn match cookString        "\(\".*\"\|'.*'\)"
 
-syn region cookComment  start="/*" end="*/" keepend
+syn region cookComment  start="/\*" end="\*/" keepend
 
 " some special characters
-syn match cookCharacters    "[][{}:=;]"
+syn match  cookCharacters   "\([][{}:=;]\|+=\)"
 syn keyword cookConditional if else then
 syn keyword cookLoop        loop loopstop
 syn keyword cookHosts       host-binding single-thread
-syn keyword cookStatement   fail function set unsetenv return
+syn keyword cookFunction    function
+syn keyword cookStatement   fail set unsetenv return
+syn match   cookPreProc     "#" nextgroup=cookPreProcArg
+syn keyword cookPreProcArg  contained include include-cooked include-cooked-nowarn
+syn keyword cookPreProcArg  contained if elif else endif ifdef ifndef pragma pragma
+syn region  cookCStatement  start="{" end="}" fold transparent
+hi link cookPreProcArg cookPreProc
 hi link cookConditional cookStatement
+hi link cookCharacters cookStatement
 hi link cookLoop cookStatement
 hi link cookHosts cookStatement
-hi link cookCharacters cookSpecial
-
-if version >= 508 || !exists("did_make_syn_inits")
-  if version < 508
-    let did_make_syn_inits = 1
-    command -nargs=+ HiLink hi link <args>
-  else
-    command -nargs=+ HiLink hi def link <args>
-  endif
-
-  HiLink cookComment        Comment
-  HiLink cookString         String
-  HiLink cookStatement      Statement
-  delcommand HiLink
-endif
 
 let b:current_syntax = "cook"
+
+hi def link cookSpecial         SpecialKey
+hi def link cookPreProc         PreProc
+hi def link cookComment         Comment
+hi def link cookString          String
+hi def link cookStatement       Statement
+hi def link cookFunction        Function
+
