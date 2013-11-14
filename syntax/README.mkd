@@ -1,0 +1,8 @@
+# README
+
+This is a plugin for using Cook build program.
+For now, it only has syntax for cookbooks.
+
+## Installation
+
+Use pathogen, vundle, or merge the directories with your .vim dir.
