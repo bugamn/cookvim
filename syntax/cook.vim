@@ -1,7 +1,7 @@
 " Vim syntax file
 " Language:  Cook
 " Maintainer: Daniel Alves <daniel.fsalves@gmail.com>
-" URL:
+" URL: https://github.com/bugamn/cookvim
 " Last Changes:   2013 Nov 12
 
 " For version 5.x: Clear all syntax items
